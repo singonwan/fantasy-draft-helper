@@ -1,19 +1,7 @@
 'use client';
 import React, { useState } from 'react';
-
-const players = [
-	{ id: 1, name: 'Tom Brady', position: 'QB', team: 'Bucs' },
-	{ id: 2, name: 'Aaron Rodgers', position: 'QB', team: 'New York Jets' },
-	{
-		id: 3,
-		name: 'Patrick Mahomes',
-		position: 'QB',
-		team: 'Kansas City Chiefs',
-	},
-	{ id: 4, name: 'Derrick Henry', position: 'RB', team: 'Baltimore Ravens' },
-	{ id: 5, name: 'Devante Adams', position: 'WR', team: 'Las Vegas Raiders' },
-	// Add more players as needed
-];
+import PlayerTable from './PlayerTable';
+import { PLAYERS } from '@/data/players';
 
 const SearchBar = () => {
 	const [searchTerm, setSearchTerm] = useState('');
@@ -21,7 +9,7 @@ const SearchBar = () => {
 	const [addedPlayers, setAddedPlayers] = useState([]);
 	console.log(addedPlayers);
 
-	const filteredPlayers = players.filter(
+	const filteredPlayers = PLAYERS.filter(
 		(player) =>
 			searchTerm.length > 0 &&
 			player.name.toLowerCase().startsWith(searchTerm.toLowerCase()) &&
@@ -87,6 +75,8 @@ const SearchBar = () => {
 					</ul>
 				</div>
 			</div>
+
+			<PlayerTable />
 
 			<div className="w-full p-24">
 				<h1>Your Ranking</h1>
