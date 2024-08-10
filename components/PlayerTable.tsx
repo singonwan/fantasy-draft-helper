@@ -7,8 +7,7 @@ import {
 	ColumnDef,
 	Row,
 } from '@tanstack/react-table';
-import React, { CSSProperties, useState } from 'react';
-import { PLAYERS } from '@/data/players';
+import React, { CSSProperties } from 'react';
 import {
 	arrayMove,
 	SortableContext,
@@ -28,13 +27,7 @@ import {
 	useSensors,
 } from '@dnd-kit/core';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
-
-type Player = {
-	id: string;
-	name: string;
-	position: string;
-	team: string;
-};
+import { Player } from '@/types';
 
 // Cell Component
 const RowDragHandleCell = ({ rowId }: { rowId: string }) => {
@@ -74,7 +67,7 @@ const DraggableRow = ({ row }: { row: Row<Player> }) => {
 	);
 };
 
-const PlayerTable = () => {
+const PlayerTable = ({ players, setPlayers }) => {
 	const columns = React.useMemo<ColumnDef<Player>[]>(
 		() => [
 			{
@@ -101,8 +94,6 @@ const PlayerTable = () => {
 		],
 		[]
 	);
-
-	const [players, setPlayers] = useState(PLAYERS);
 
 	const dataIds = React.useMemo<UniqueIdentifier[]>(
 		() => players?.map(({ id }) => id),
@@ -178,16 +169,4 @@ const PlayerTable = () => {
 	);
 };
 
-{
-	/* <tr key={row.id}>
-									{row.getVisibleCells().map((cell) => (
-										<td key={cell.id}>
-											{flexRender(
-												cell.column.columnDef.cell,
-												cell.getContext()
-											)}
-										</td>
-									))}
-								</tr> */
-}
 export default PlayerTable;

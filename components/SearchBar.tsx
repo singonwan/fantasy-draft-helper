@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import PlayerTable from './PlayerTable';
 import { PLAYERS } from '@/data/players';
+import { Player } from '@/types';
 
 const SearchBar = () => {
 	const [searchTerm, setSearchTerm] = useState('');
@@ -16,7 +17,7 @@ const SearchBar = () => {
 			player.name.toLowerCase() !== searchTerm.toLowerCase()
 	);
 
-	const onAddPlayer = (player) => {
+	const onAddPlayer = (player: Player) => {
 		setSearchTerm(player.name);
 		console.log(player);
 		setAddedPlayers((prevAddedPlayers) => {
@@ -30,7 +31,7 @@ const SearchBar = () => {
 		});
 	};
 
-	const onRemovePlayer = (player) => {
+	const onRemovePlayer = (player: Player) => {
 		const index = addedPlayers.indexOf(player);
 		const updatedAddedPlayers = [...addedPlayers];
 		if (index > -1) {
@@ -54,14 +55,6 @@ const SearchBar = () => {
 						placeholder="Search for a Player..."
 						// required
 					/>
-
-					{/* <button
-					// might not need this button
-					className="bg-slate-600 rounded-xl"
-					onClick={() => onAddPlayer(searchTerm)}
-				>
-					Add Player
-				</button> */}
 					<ul>
 						{filteredPlayers.slice(0, 10).map((player) => (
 							<li
@@ -76,7 +69,7 @@ const SearchBar = () => {
 				</div>
 			</div>
 
-			<PlayerTable />
+			<PlayerTable players={addedPlayers} setPlayers={setAddedPlayers} />
 
 			<div className="w-full p-24">
 				<h1>Your Ranking</h1>
