@@ -59,7 +59,11 @@ const DraggableRow = ({ row }: { row: Row<Player> }) => {
 		// connect row ref to dnd-kit, apply important styles
 		<tr ref={setNodeRef} style={style}>
 			{row.getVisibleCells().map((cell) => (
-				<td key={cell.id} style={{ width: cell.column.getSize() }}>
+				<td
+					key={cell.id}
+					style={{ width: cell.column.getSize() }}
+					className="px-6 py-2 whitespace-nowrap text-center"
+				>
 					{flexRender(cell.column.columnDef.cell, cell.getContext())}
 				</td>
 			))}
@@ -98,7 +102,7 @@ const PlayerTable = ({ players, setPlayers, onRemovePlayer }) => {
 	const nonMemoColumns: ColumnDef<Player>[] = [
 		{
 			accessorKey: 'id',
-			header: 'Remove',
+			header: 'Remove/Drafted',
 			cell: ({ row }) => (
 				<div className="font-bold flex justify-center items-center">
 					<button onClick={() => onRemovePlayer(row.original.id)}>X</button>
@@ -149,13 +153,17 @@ const PlayerTable = ({ players, setPlayers, onRemovePlayer }) => {
 			onDragEnd={handleDragEnd}
 			sensors={sensors}
 		>
-			<div className="w-full p-24">
-				<table>
-					<thead>
+			<div className="w-full px-24 py-4">
+				<table className="table w-full divide-y divide-gray-200 relative">
+					<thead className="bg-gray-50">
 						{table.getHeaderGroups().map((headerGroup) => (
-							<tr key={headerGroup.id}>
+							<tr key={headerGroup.id} className="table-row">
 								{headerGroup.headers.map((header) => (
-									<th key={header.id} colSpan={header.colSpan}>
+									<th
+										key={header.id}
+										colSpan={header.colSpan}
+										className="uppercase p-2"
+									>
 										{header.isPlaceholder
 											? null
 											: flexRender(
@@ -167,7 +175,7 @@ const PlayerTable = ({ players, setPlayers, onRemovePlayer }) => {
 							</tr>
 						))}
 					</thead>
-					<tbody>
+					<tbody className="bg-white divide-y divide-gray-200">
 						<SortableContext
 							items={dataIds}
 							strategy={verticalListSortingStrategy}
@@ -175,9 +183,6 @@ const PlayerTable = ({ players, setPlayers, onRemovePlayer }) => {
 							{table.getRowModel().rows.map((row) => (
 								<DraggableRow key={row.id} row={row} />
 							))}
-							{/* <td>
-								<button onClick={() => onRemovePlayer()}>X</button>
-							</td> */}
 						</SortableContext>
 					</tbody>
 				</table>

@@ -44,23 +44,23 @@ const SearchBar = () => {
 
 	return (
 		<div className="w-full flex flex-col items-center justify-center flex-wrap">
-			<div className="w-96">
-				<label>Player Search</label>
-				<div className="flex items-center justify-center w-full flex-wrap">
+			<div className="w-96 ">
+				<label className="font-bold py-4 text-lg">Player Search</label>
+				<div className="flex items-center justify-center w-full flex-wrap relative">
 					<input
 						type="text"
 						id="searchbar"
 						name="searchbar"
 						value={searchTerm}
 						onChange={(e) => setSearchTerm(e.target.value)}
-						className="block w-96 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						className="block w-96 p-4 my-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
 						placeholder="Search for a Player..."
 						// required
 					/>
 					<ul>
 						{filteredPlayers.slice(0, 10).map((player) => (
 							<li
-								className="cursor-pointer w-96 border-gray-300 border bg-gray-50 p-2"
+								className="cursor-pointer py-1 w-96 border-gray-300 border bg-gray-50 hover:bg-yellow-50 hover:text-gray-900 rounded-md text-center"
 								key={player.id}
 								onClick={() => onAddPlayer(player)}
 							>
@@ -69,6 +69,10 @@ const SearchBar = () => {
 						))}
 					</ul>
 				</div>
+			</div>
+
+			<div className="w-full px-24 pt-4">
+				<h1 className="text-2xl font-bold">Your Rankings</h1>
 			</div>
 
 			<PlayerTable
