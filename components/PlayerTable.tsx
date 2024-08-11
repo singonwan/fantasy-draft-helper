@@ -28,6 +28,7 @@ import {
 } from '@dnd-kit/core';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { Player } from '@/types';
+import { IoMdCloseCircle } from 'react-icons/io';
 
 // Cell Component
 const RowDragHandleCell = ({ rowId }: { rowId: string }) => {
@@ -115,7 +116,9 @@ const PlayerTable = ({ players, setPlayers, onRemovePlayer }) => {
 			header: 'Remove/Drafted',
 			cell: ({ row }) => (
 				<div className="font-bold flex justify-center items-center">
-					<button onClick={() => onRemovePlayer(row.original.id)}>X</button>
+					<button onClick={() => onRemovePlayer(row.original.id)}>
+						<IoMdCloseCircle size={24} />
+					</button>
 				</div>
 			),
 		},
