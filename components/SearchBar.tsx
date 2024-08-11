@@ -13,7 +13,7 @@ const SearchBar = () => {
 	const filteredPlayers = PLAYERS.filter(
 		(player) =>
 			searchTerm.length > 0 &&
-			player.name.toLowerCase().startsWith(searchTerm.toLowerCase()) &&
+			player.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
 			player.name.toLowerCase() !== searchTerm.toLowerCase()
 	);
 
