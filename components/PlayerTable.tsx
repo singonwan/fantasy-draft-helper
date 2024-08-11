@@ -67,8 +67,8 @@ const DraggableRow = ({ row }: { row: Row<Player> }) => {
 	);
 };
 
-const PlayerTable = ({ players, setPlayers }) => {
-	const columns = React.useMemo<ColumnDef<Player>[]>(
+const PlayerTable = ({ players, setPlayers, onRemovePlayer }) => {
+	const memoColumns = React.useMemo<ColumnDef<Player>[]>(
 		() => [
 			{
 				id: 'drag-handle',
@@ -92,8 +92,22 @@ const PlayerTable = ({ players, setPlayers }) => {
 				cell: (info) => info.getValue(),
 			},
 		],
-		[]
+		[] // when adding dependency => drag and drop stops working.
 	);
+
+	const nonMemoColumns: ColumnDef<Player>[] = [
+		{
+			accessorKey: 'id',
+			header: 'Remove',
+			cell: ({ row }) => (
+				<div className="font-bold flex justify-center items-center">
+					<button onClick={() => onRemovePlayer(row.original.id)}>X</button>
+				</div>
+			),
+		},
+	];
+
+	const columns = [...memoColumns, ...nonMemoColumns];
 
 	const dataIds = React.useMemo<UniqueIdentifier[]>(
 		() => players?.map(({ id }) => id),
@@ -161,6 +175,9 @@ const PlayerTable = ({ players, setPlayers }) => {
 							{table.getRowModel().rows.map((row) => (
 								<DraggableRow key={row.id} row={row} />
 							))}
+							{/* <td>
+								<button onClick={() => onRemovePlayer()}>X</button>
+							</td> */}
 						</SortableContext>
 					</tbody>
 				</table>

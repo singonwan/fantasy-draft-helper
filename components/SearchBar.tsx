@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import PlayerTable from './PlayerTable';
 import { PLAYERS } from '@/data/players';
 import { Player } from '@/types';
@@ -31,14 +31,16 @@ const SearchBar = () => {
 		});
 	};
 
-	const onRemovePlayer = (player: Player) => {
-		const index = addedPlayers.indexOf(player);
-		const updatedAddedPlayers = [...addedPlayers];
-		if (index > -1) {
-			updatedAddedPlayers.splice(index, 1);
+	const onRemovePlayer = useCallback(
+		(id: string) => {
+			console.log(id);
+			const updatedAddedPlayers = addedPlayers.filter(
+				(player) => player.id !== id
+			);
 			setAddedPlayers(updatedAddedPlayers);
-		}
-	};
+		},
+		[addedPlayers]
+	);
 
 	return (
 		<div className="w-full flex flex-col items-center justify-center flex-wrap">
@@ -69,7 +71,11 @@ const SearchBar = () => {
 				</div>
 			</div>
 
-			<PlayerTable players={addedPlayers} setPlayers={setAddedPlayers} />
+			<PlayerTable
+				players={addedPlayers}
+				setPlayers={setAddedPlayers}
+				onRemovePlayer={onRemovePlayer}
+			/>
 
 			<div className="w-full p-24">
 				<h1>Your Ranking</h1>
@@ -82,7 +88,7 @@ const SearchBar = () => {
 						<p>
 							{player.name} {player.position}, {player.team}
 						</p>
-						<button onClick={() => onRemovePlayer(player)}>X</button>
+						<button onClick={() => onRemovePlayer(player.id)}>X</button>
 					</div>
 				))}
 			</div>
