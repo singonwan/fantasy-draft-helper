@@ -57,16 +57,26 @@ const DraggableRow = ({ row }: { row: Row<Player> }) => {
 	};
 	return (
 		// connect row ref to dnd-kit, apply important styles
-		<tr ref={setNodeRef} style={style}>
-			{row.getVisibleCells().map((cell) => (
-				<td
-					key={cell.id}
-					style={{ width: cell.column.getSize() }}
-					className="px-6 py-2 whitespace-nowrap text-center"
-				>
-					{flexRender(cell.column.columnDef.cell, cell.getContext())}
-				</td>
-			))}
+		<tr
+			ref={setNodeRef}
+			style={style}
+			className={`${row.original.position === 'QB' && 'bg-red-300'} 
+                ${row.original.position === 'RB' && 'bg-green-300'}
+				${row.original.position === 'WR' && 'bg-blue-300'}
+				${row.original.position === 'TE' && 'bg-orange-300'}
+			}`}
+		>
+			{row.getVisibleCells().map((cell) => {
+				return (
+					<td
+						key={cell.id}
+						style={{ width: cell.column.getSize() }}
+						className={`px-6 py-2 whitespace-nowrap text-center`}
+					>
+						{flexRender(cell.column.columnDef.cell, cell.getContext())}
+					</td>
+				);
+			})}
 		</tr>
 	);
 };
@@ -175,7 +185,7 @@ const PlayerTable = ({ players, setPlayers, onRemovePlayer }) => {
 							</tr>
 						))}
 					</thead>
-					<tbody className="bg-white divide-y divide-gray-200">
+					<tbody className={`divide-y divide-gray-200`}>
 						<SortableContext
 							items={dataIds}
 							strategy={verticalListSortingStrategy}
