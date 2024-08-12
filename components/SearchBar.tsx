@@ -45,7 +45,9 @@ const SearchBar = () => {
 	return (
 		<div className="w-full flex flex-col items-center justify-center flex-wrap pt-4">
 			<div className="w-96 ">
-				<label className="font-bold py-4 text-lg">Player Search</label>
+				<label className="font-bold py-4 text-md uppercase">
+					Player Search
+				</label>
 				<div className="flex items-center justify-center w-full flex-wrap relative">
 					<input
 						type="text"

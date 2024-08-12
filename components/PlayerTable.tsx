@@ -61,11 +61,16 @@ const DraggableRow = ({ row }: { row: Row<Player> }) => {
 		<tr
 			ref={setNodeRef}
 			style={style}
-			className={`${row.original.position === 'QB' && 'bg-red-300'} 
-                ${row.original.position === 'RB' && 'bg-green-300'}
-				${row.original.position === 'WR' && 'bg-blue-300'}
-				${row.original.position === 'TE' && 'bg-orange-300'}
-			}`}
+			className={`bg-gradient-to-r${
+				row.original.position === 'QB'
+					? ' from-slate-300 to-red-400'
+					: row.original.position === 'RB'
+					? ' from-slate-300 to-green-300'
+					: row.original.position === 'WR'
+					? ' from-slate-300 to-blue-400'
+					: ' from-slate-300 to-orange-300'
+			}
+			`}
 		>
 			{row.getVisibleCells().map((cell) => {
 				return (
