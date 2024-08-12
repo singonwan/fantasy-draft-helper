@@ -168,7 +168,7 @@ const PlayerTable = ({ players, setPlayers, onRemovePlayer }) => {
 		>
 			<div className="w-full px-24 py-4">
 				<table className="table w-full divide-y divide-gray-200 relative">
-					<thead className="bg-gray-50">
+					<thead className="bg-slate-300">
 						{table.getHeaderGroups().map((headerGroup) => (
 							<tr key={headerGroup.id} className="table-row">
 								{headerGroup.headers.map((header) => (

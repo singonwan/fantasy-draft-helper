@@ -43,7 +43,7 @@ const SearchBar = () => {
 	);
 
 	return (
-		<div className="w-full flex flex-col items-center justify-center flex-wrap">
+		<div className="w-full flex flex-col items-center justify-center flex-wrap pt-4">
 			<div className="w-96 ">
 				<label className="font-bold py-4 text-lg">Player Search</label>
 				<div className="flex items-center justify-center w-full flex-wrap relative">
@@ -58,7 +58,7 @@ const SearchBar = () => {
 						// required
 					/>
 					<ul>
-						{filteredPlayers.slice(0, 10).map((player) => (
+						{filteredPlayers.slice(0, 8).map((player) => (
 							<li
 								className="cursor-pointer py-1 w-96 border-gray-300 border bg-gray-50 hover:bg-yellow-50 hover:text-gray-900 rounded-md text-center"
 								key={player.id}
@@ -71,7 +71,7 @@ const SearchBar = () => {
 				</div>
 			</div>
 
-			<div className="w-full px-24 pt-4">
+			<div className="w-full px-24 pt-8">
 				<h1 className="text-2xl font-bold">Your Rankings</h1>
 			</div>
 
@@ -81,7 +81,7 @@ const SearchBar = () => {
 				onRemovePlayer={onRemovePlayer}
 			/>
 
-			<div className="w-full p-24">
+			{/* <div className="w-full p-24">
 				<h1>Your Ranking</h1>
 				{addedPlayers.map((player, index) => (
 					<div
@@ -95,7 +95,7 @@ const SearchBar = () => {
 						<button onClick={() => onRemovePlayer(player.id)}>X</button>
 					</div>
 				))}
-			</div>
+			</div> */}
 		</div>
 	);
 };
