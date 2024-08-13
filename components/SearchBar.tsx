@@ -74,7 +74,7 @@ const SearchBar = () => {
 			</div>
 
 			<div className="w-full px-24 pt-8">
-				<h1 className="text-2xl font-bold">Your Rankings</h1>
+				<h1 className="text-xl font-bold uppercase">Your Rankings</h1>
 			</div>
 
 			<PlayerTable
