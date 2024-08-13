@@ -588,12 +588,12 @@ export const PLAYERS = [
 		team: 'Indianapolis Colts',
 	},
 	{ id: '160', name: 'Jerome Ford', position: 'RB', team: 'Cleveland Browns' },
-	{
-		id: '161',
-		name: 'Pat Freirmuth',
-		position: 'TE',
-		team: 'Pittsburgh Steelers',
-	},
+	// {
+	// 	id: '161',
+	// 	name: 'Pat Freirmuth',
+	// 	position: 'TE',
+	// 	team: 'Pittsburgh Steelers',
+	// },
 	{ id: '162', name: 'Khalil Shakir', position: 'WR', team: 'Buffalo Bills' },
 	{
 		id: '163',
