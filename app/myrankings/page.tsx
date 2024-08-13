@@ -1,4 +1,5 @@
 import SearchBar from '@/components/SearchBar';
+import Link from 'next/link';
 import React from 'react';
 
 const MyOrder = () => {
@@ -16,6 +17,14 @@ const MyOrder = () => {
 						}}
 						className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
 					/>
+				</div>
+				<div className="px-24">
+					<Link
+						href="/"
+						className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
+					>
+						Back
+					</Link>
 				</div>
 				<h1 className="font-bold text-3xl p-8 uppercase text-center">
 					Fantasy Draft Helper
