@@ -87,7 +87,7 @@ const DraggableRow = ({ row }: { row: Row<Player> }) => {
 	);
 };
 
-const PlayerTable = ({ players, setPlayers, onRemovePlayer }) => {
+const PlayerTable = ({ players, setPlayers, onRemovePlayer, filtered }) => {
 	const memoColumns = React.useMemo<ColumnDef<Player>[]>(
 		() => [
 			{
@@ -114,22 +114,26 @@ const PlayerTable = ({ players, setPlayers, onRemovePlayer }) => {
 		],
 		[] // when adding dependency => drag and drop stops working.
 	);
+	let columns = [];
+	if (!filtered) {
+		const nonMemoColumns: ColumnDef<Player>[] = [
+			{
+				accessorKey: 'id',
+				header: 'Remove/Drafted',
+				cell: ({ row }) => (
+					<div className="font-bold flex justify-center items-center">
+						<button onClick={() => onRemovePlayer(row.original.id)}>
+							<IoMdCloseCircle size={24} />
+						</button>
+					</div>
+				),
+			},
+		];
 
-	const nonMemoColumns: ColumnDef<Player>[] = [
-		{
-			accessorKey: 'id',
-			header: 'Remove/Drafted',
-			cell: ({ row }) => (
-				<div className="font-bold flex justify-center items-center">
-					<button onClick={() => onRemovePlayer(row.original.id)}>
-						<IoMdCloseCircle size={24} />
-					</button>
-				</div>
-			),
-		},
-	];
-
-	const columns = [...memoColumns, ...nonMemoColumns];
+		columns = [...memoColumns, ...nonMemoColumns];
+	} else {
+		columns = [...memoColumns];
+	}
 
 	const dataIds = React.useMemo<UniqueIdentifier[]>(
 		() => players?.map(({ id }) => id),

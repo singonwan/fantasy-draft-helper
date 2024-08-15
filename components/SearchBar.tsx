@@ -40,16 +40,28 @@ const positions = [
 const SearchBar = () => {
 	const [searchTerm, setSearchTerm] = useState('');
 
-	const [positionSelected, setPositionSelected] = useState(positions[1]);
+	const [positionSelected, setPositionSelected] = useState(positions[0]);
 
 	const [addedPlayers, setAddedPlayers] = useState([]);
 	console.log(addedPlayers);
+	const [filteredPlayers, setFilteredPlayers] = useState([]);
 
-	const filteredPlayers = PLAYERS.filter(
+	const searchFilteredPlayers = PLAYERS.filter(
 		(player) =>
 			searchTerm.length > 0 &&
 			player.name.toLowerCase().includes(searchTerm.toLowerCase())
 	);
+
+	const handlePositionChange = (value) => {
+		setPositionSelected(value);
+
+		let updatedPlayers = [...addedPlayers];
+		const filterPlayers = updatedPlayers.filter(
+			(player) => player.position === value.position
+		);
+
+		setFilteredPlayers(filterPlayers);
+	};
 
 	const onAddPlayer = (player: Player) => {
 		setSearchTerm(player.name);
@@ -77,16 +89,54 @@ const SearchBar = () => {
 		[addedPlayers]
 	);
 
+	let players = addedPlayers;
+
+	console.log(positionSelected);
+
+	if (positionSelected.position !== 'ALL') {
+		players = filteredPlayers;
+	}
+
 	return (
 		<div className="w-full flex flex-col items-center justify-center flex-wrap pt-4">
-			<div className="w-96 ">
-				<label className="font-bold py-4 text-md uppercase">
-					Player Search
-				</label>
-				<div className="mx-auto w-40 py-4">
+			<div className="w-10/12 px-24 flex items-center justify-center">
+				<div className="flex items-center justify-center w-full relative">
+					<div className="flex flex-col items-center">
+						<label className="font-bold  text-md uppercase text-center">
+							Player Search
+						</label>
+						<input
+							type="text"
+							id="searchbar"
+							name="searchbar"
+							value={searchTerm}
+							onChange={(e) => setSearchTerm(e.target.value)}
+							className="block w-96 p-4 my-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+							placeholder="Search for a Player..."
+							// required
+						/>
+						<ul>
+							{searchFilteredPlayers.slice(0, 8).map((player) => (
+								<li
+									className="cursor-pointer py-1 w-96 border-gray-300 border bg-gray-50 hover:bg-yellow-50 hover:text-gray-900 rounded-md text-center"
+									key={player.id}
+									onClick={() => onAddPlayer(player)}
+								>
+									{player.name}, {player.position}, {player.team}
+								</li>
+							))}
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div className="grid grid-cols-3 w-10/12 px-24">
+				<p></p>
+				<p></p>
+				<div className="mx-auto w-40 pt-4 ">
 					<Field>
 						<Label>Position</Label>
-						<Listbox value={positionSelected} onChange={setPositionSelected}>
+						<Listbox value={positionSelected} onChange={handlePositionChange}>
 							<ListboxButton
 								className={clsx(
 									'relative block w-full rounded-lg bg-black/5 py-1.5 pr-8 pl-3 text-left text-sm/6 text-black',
@@ -103,8 +153,8 @@ const SearchBar = () => {
 								anchor="bottom"
 								transition
 								className={clsx(
-									'w-[var(--button-width)] rounded-xl border border-black/5 bg-black/5 p-1 [--anchor-gap:var(--spacing-1)] focus:outline-none',
-									'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0'
+									'w-[var(--button-width)] rounded-xl border border-black/5 bg-[#f4f4f4] p-1 [--anchor-gap:var(--spacing-1)] focus:outline-none',
+									'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-100'
 								)}
 							>
 								{positions.map((position) => (
@@ -122,29 +172,11 @@ const SearchBar = () => {
 							</ListboxOptions>
 						</Listbox>
 					</Field>
-				</div>
-				<div className="flex items-center justify-center w-full flex-wrap relative">
-					<input
-						type="text"
-						id="searchbar"
-						name="searchbar"
-						value={searchTerm}
-						onChange={(e) => setSearchTerm(e.target.value)}
-						className="block w-96 p-4 my-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
-						placeholder="Search for a Player..."
-						// required
-					/>
-					<ul>
-						{filteredPlayers.slice(0, 8).map((player) => (
-							<li
-								className="cursor-pointer py-1 w-96 border-gray-300 border bg-gray-50 hover:bg-yellow-50 hover:text-gray-900 rounded-md text-center"
-								key={player.id}
-								onClick={() => onAddPlayer(player)}
-							>
-								{player.name}, {player.position}, {player.team}
-							</li>
-						))}
-					</ul>
+					<p className="text-xs">
+						note: players cannot be added or dragged and dropped when a specific
+						position is selected, to make changes to the ranking select ALL
+						poistions
+					</p>
 				</div>
 			</div>
 
@@ -153,7 +185,8 @@ const SearchBar = () => {
 			</div>
 
 			<PlayerTable
-				players={addedPlayers}
+				filtered={positionSelected.position === 'ALL' ? false : true}
+				players={players}
 				setPlayers={setAddedPlayers}
 				onRemovePlayer={onRemovePlayer}
 			/>
