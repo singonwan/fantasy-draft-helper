@@ -171,8 +171,8 @@ const PlayerTable = ({ players, setPlayers, onRemovePlayer }) => {
 			onDragEnd={handleDragEnd}
 			sensors={sensors}
 		>
-			<div className="w-full px-24 py-4">
-				<table className="table w-full divide-y divide-gray-200 relative">
+			<div className="w-full px-24 py-4 flex items-center justify-center">
+				<table className="table w-10/12 divide-y divide-gray-200 relative">
 					<thead className="bg-slate-300">
 						{table.getHeaderGroups().map((headerGroup) => (
 							<tr key={headerGroup.id} className="table-row">
