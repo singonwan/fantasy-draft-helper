@@ -2,7 +2,8 @@
 import React, { useCallback, useState } from 'react';
 import PlayerTable from './PlayerTable';
 import { PLAYERS } from '@/data/players';
-import { Player } from '@/types';
+import { POSITIONS } from '@/data/positions';
+import { Player, PlayerPosition } from '@/types';
 import {
 	Field,
 	Label,
@@ -14,37 +15,16 @@ import {
 import clsx from 'clsx';
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
 
-const positions = [
-	{
-		id: 1,
-		position: 'ALL',
-	},
-	{
-		id: 2,
-		position: 'QB',
-	},
-	{
-		id: 3,
-		position: 'WR',
-	},
-	{
-		id: 4,
-		position: 'RB',
-	},
-	{
-		id: 5,
-		position: 'TE',
-	},
-];
-
 const SearchBar = () => {
-	const [searchTerm, setSearchTerm] = useState('');
+	const [searchTerm, setSearchTerm] = useState<string>('');
 
-	const [positionSelected, setPositionSelected] = useState(positions[0]);
+	const [positionSelected, setPositionSelected] = useState<PlayerPosition>(
+		POSITIONS[0]
+	);
 
-	const [addedPlayers, setAddedPlayers] = useState([]);
+	const [addedPlayers, setAddedPlayers] = useState<Player[]>([]);
 	console.log(addedPlayers);
-	const [filteredPlayers, setFilteredPlayers] = useState([]);
+	const [filteredPlayers, setFilteredPlayers] = useState<Player[]>([]);
 
 	const searchFilteredPlayers = PLAYERS.filter(
 		(player) =>
@@ -52,7 +32,7 @@ const SearchBar = () => {
 			player.name.toLowerCase().includes(searchTerm.toLowerCase())
 	);
 
-	const handlePositionChange = (value) => {
+	const handlePositionChange = (value: PlayerPosition) => {
 		setPositionSelected(value);
 
 		let updatedPlayers = [...addedPlayers];
@@ -159,7 +139,7 @@ const SearchBar = () => {
 									'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-100'
 								)}
 							>
-								{positions.map((position) => (
+								{POSITIONS.map((position) => (
 									<ListboxOption
 										key={position.position}
 										value={position}

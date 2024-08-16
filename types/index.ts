@@ -4,3 +4,8 @@ export type Player = {
 	position: string;
 	team: string;
 };
+
+export type PlayerPosition = {
+	id: number;
+	position: string;
+};

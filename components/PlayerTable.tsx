@@ -87,7 +87,19 @@ const DraggableRow = ({ row }: { row: Row<Player> }) => {
 	);
 };
 
-const PlayerTable = ({ players, setPlayers, onRemovePlayer, filtered }) => {
+type PlayerTableProps = {
+	players: Player[];
+	setPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
+	onRemovePlayer: (id: string) => void;
+	filtered: boolean;
+};
+
+const PlayerTable: React.FC<PlayerTableProps> = ({
+	players,
+	setPlayers,
+	onRemovePlayer,
+	filtered,
+}) => {
 	const memoColumns = React.useMemo<ColumnDef<Player>[]>(
 		() => [
 			{
