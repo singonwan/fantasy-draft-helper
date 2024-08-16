@@ -105,27 +105,29 @@ const SearchBar = () => {
 						<label className="font-bold  text-md uppercase text-center">
 							Player Search
 						</label>
-						<input
-							type="text"
-							id="searchbar"
-							name="searchbar"
-							value={searchTerm}
-							onChange={(e) => setSearchTerm(e.target.value)}
-							className="block w-96 p-4 my-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
-							placeholder="Search for a Player..."
-							// required
-						/>
-						<ul>
-							{searchFilteredPlayers.slice(0, 8).map((player) => (
-								<li
-									className="cursor-pointer py-1 w-96 border-gray-300 border bg-gray-50 hover:bg-yellow-50 hover:text-gray-900 rounded-md text-center"
-									key={player.id}
-									onClick={() => onAddPlayer(player)}
-								>
-									{player.name}, {player.position}, {player.team}
-								</li>
-							))}
-						</ul>
+						<div className="relative w-full">
+							<input
+								type="text"
+								id="searchbar"
+								name="searchbar"
+								value={searchTerm}
+								onChange={(e) => setSearchTerm(e.target.value)}
+								className="block w-96 p-4 my-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+								placeholder="Search for a Player..."
+								// required
+							/>
+							<ul className="absolute z-50 w-96 mt-2 bg-white border border-gray-300 rounded-md shadow-lg">
+								{searchFilteredPlayers.slice(0, 8).map((player) => (
+									<li
+										className="cursor-pointer py-1 w-96 border-gray-300 border bg-gray-50 hover:bg-yellow-50 hover:text-gray-900 rounded-md text-center"
+										key={player.id}
+										onClick={() => onAddPlayer(player)}
+									>
+										{player.name}, {player.position}, {player.team}
+									</li>
+								))}
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
