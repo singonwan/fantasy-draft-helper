@@ -322,12 +322,12 @@ export const PLAYERS = [
 		position: 'WR',
 		team: 'Kansas City Chiefs',
 	},
-	// {
-	// 	id: '89',
-	// 	name: 'Jerick McKinnon',
-	// 	position: 'RB',
-	// 	team: 'Kansas City Chiefs',
-	// },
+	{
+		id: '89',
+		name: 'Jordan Mason',
+		position: 'RB',
+		team: 'San Francisco 49ers',
+	},
 	{ id: '90', name: 'Tyler Boyd', position: 'WR', team: 'Tennessee Titans' },
 	{
 		id: '91',
@@ -588,12 +588,12 @@ export const PLAYERS = [
 		team: 'Indianapolis Colts',
 	},
 	{ id: '160', name: 'Jerome Ford', position: 'RB', team: 'Cleveland Browns' },
-	// {
-	// 	id: '161',
-	// 	name: 'Pat Freirmuth',
-	// 	position: 'TE',
-	// 	team: 'Pittsburgh Steelers',
-	// },
+	{
+		id: '161',
+		name: 'Braelon Allen',
+		position: 'RB',
+		team: 'New York Jets',
+	},
 	{ id: '162', name: 'Khalil Shakir', position: 'WR', team: 'Buffalo Bills' },
 	{
 		id: '163',
