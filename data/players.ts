@@ -845,7 +845,12 @@ export const PLAYERS = [
 		position: 'TE',
 		team: 'Los Angeles Rams',
 	},
-	// { id: '223', name: 'Tyler Boyd', position: 'TE', team: 'Tennessee Titans' },
+	{
+		id: '223',
+		name: 'Trey Sermon',
+		position: 'RB',
+		team: 'Indianapolis Colts',
+	},
 	{
 		id: '224',
 		name: 'Tank Bigsby',
@@ -959,7 +964,8 @@ export const PLAYERS = [
 		position: 'WR',
 		team: 'Cincinnati Bengals',
 	},
-	// { id: '252', name: '', position: '', team: '' },
+	{ id: '252', name: 'Michael Penix', position: 'QB', team: 'Atlanta Falcons' },
+	// { id: '253', name: '', position: '', team: '' },
 
 	// Add more players as needed
 ];
