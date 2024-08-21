@@ -15,16 +15,27 @@ import {
 import clsx from 'clsx';
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
 
-const SearchBar = () => {
+const SearchBar = ({
+	addedPlayers,
+	setAddedPlayers,
+	filteredPlayers,
+	setFilteredPlayers,
+}: {
+	addedPlayers: Player[];
+	setAddedPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
+	filteredPlayers: Player[];
+	setFilteredPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
+}) => {
 	const [searchTerm, setSearchTerm] = useState<string>('');
 
 	const [positionSelected, setPositionSelected] = useState<PlayerPosition>(
 		POSITIONS[0]
 	);
 
-	const [addedPlayers, setAddedPlayers] = useState<Player[]>([]);
-	console.log(addedPlayers);
-	const [filteredPlayers, setFilteredPlayers] = useState<Player[]>([]);
+	// const [addedPlayers, setAddedPlayers] = useState<Player[]>([]);
+	// console.log(addedPlayers);
+
+	// const [filteredPlayers, setFilteredPlayers] = useState<Player[]>([]);
 
 	const searchFilteredPlayers = PLAYERS.filter(
 		(player) =>
