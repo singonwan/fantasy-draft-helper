@@ -2,7 +2,7 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-nextauth.js/prisma/posgreSQL/postico for authentication and DB
+nextauth.js/prisma/posgreSQL/postico/supabase for authentication and DB
 
 ## Getting Started
 
