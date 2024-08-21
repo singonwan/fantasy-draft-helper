@@ -1,0 +1,33 @@
+import Link from 'next/link';
+import React from 'react';
+
+const NavBar = () => {
+	return (
+		<nav className="block w-full max-w-screen-xl px-4 py-2 mx-auto text-white bg-white border shadow-md rounded-xl border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
+			<div className="container flex items-center justify-between mx-auto text-blue-gray-900">
+				<Link
+					href="/"
+					className="mr-4 text-slate-800 block cursor-pointer py-1.5 font-sans text-base  leading-relaxed antialiased font-bold"
+				>
+					Fantasy Draft Helper
+				</Link>
+				<div className="flex items-center gap-x-1">
+					<button
+						className="hidden px-4 py-2 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+						type="button"
+					>
+						<span>Log In</span>
+					</button>
+					<button
+						className="hidden select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+						type="button"
+					>
+						<span>Sign up</span>
+					</button>
+				</div>
+			</div>
+		</nav>
+	);
+};
+
+export default NavBar;
