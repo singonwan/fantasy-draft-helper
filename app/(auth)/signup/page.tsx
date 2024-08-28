@@ -1,7 +1,16 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { signup } from '../actions';
+import { useFormState, useFormStatus } from 'react-dom';
+import SignupFormSubmit from '../../../components/SignUpFormSubmit';
 
 const SignUpPage = () => {
+	const [state, action] = useFormState(signup, null);
+
+	// console.log(state?.errors);
+
 	return (
 		<>
 			<div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -12,7 +21,7 @@ const SignUpPage = () => {
 				</div>
 
 				<div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-					<form action="#" method="POST" className="space-y-6">
+					<form action={action} className="space-y-6">
 						<div>
 							<label
 								htmlFor="name"
@@ -25,11 +34,14 @@ const SignUpPage = () => {
 									id="name"
 									name="name"
 									type="name"
-									required
+									// required
 									autoComplete="name"
-									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0 py-1.5 px-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 								/>
 							</div>
+							{state?.errors?.name && (
+								<p className="text-red-600 text-xs pt-1">{state.errors.name}</p>
+							)}
 						</div>
 						<div>
 							<label
@@ -42,12 +54,17 @@ const SignUpPage = () => {
 								<input
 									id="email"
 									name="email"
-									type="email"
-									required
+									// type="email"
+									// required
 									autoComplete="email"
-									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0 py-1.5 px-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 								/>
 							</div>
+							{state?.errors?.email && (
+								<p className="text-red-600 text-xs pt-1">
+									{state.errors.email}
+								</p>
+							)}
 						</div>
 
 						<div>
@@ -64,11 +81,16 @@ const SignUpPage = () => {
 									id="password"
 									name="password"
 									type="password"
-									required
+									// required
 									autoComplete="current-password"
-									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0 py-1.5 px-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 								/>
 							</div>
+							{state?.errors?.password && (
+								<p className="text-red-600 text-xs pt-1">
+									{state.errors.password}
+								</p>
+							)}
 						</div>
 						<div>
 							<div className="flex items-center justify-between">
@@ -83,21 +105,21 @@ const SignUpPage = () => {
 								<input
 									id="confirmpassword"
 									name="confirmpassword"
-									type="confirmpassword"
-									required
+									type="password"
+									// required
 									autoComplete="current-password"
-									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0 py-1.5 px-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 								/>
 							</div>
+							{state?.errors?.confirmpassword && (
+								<p className="text-red-600 text-xs pt-1">
+									{state.errors.confirmpassword}
+								</p>
+							)}
 						</div>
 
 						<div>
-							<button
-								type="submit"
-								className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-							>
-								Create Account
-							</button>
+							<SignupFormSubmit />
 						</div>
 					</form>
 
