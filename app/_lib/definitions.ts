@@ -13,3 +13,8 @@ export const signupFormSchema = z
 		path: ['confirmpassword'], //setting path of error msg to 'confirm password'
 		message: 'passwords do not match',
 	});
+
+export const loginFormSchema = z.object({
+	email: z.string().email('Invalid email address'),
+	password: z.string().min(6, 'Password must be at least 6 characters long'),
+});

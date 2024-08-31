@@ -3,8 +3,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { signup } from '../actions';
-import { useFormState, useFormStatus } from 'react-dom';
-import SignupFormSubmit from '../../../components/SignUpFormSubmit';
+import { useFormState } from 'react-dom';
+import SignupFormSubmit from '../../../components/SignupFormSubmit';
 
 const SignUpPage = () => {
 	const [state, action] = useFormState(signup, null);
