@@ -68,9 +68,7 @@ export async function verifySession() {
 		console.log('Verify Session:', session);
 
 		if (!session?.userId) {
-			console.log('Invalid session');
-			// redirect('/login');
-			return { redirectUrl: '/login' };
+			console.log('not logged in');
 			return null;
 		}
 

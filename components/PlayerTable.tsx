@@ -180,48 +180,58 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 		useSensor(KeyboardSensor, {})
 	);
 
+	function handleSave() {
+		console.log(
+			'Row IDs:',
+			table.getRowModel().rows.map((row) => row.id)
+		);
+	}
+
 	return (
-		<DndContext
-			collisionDetection={closestCenter}
-			modifiers={[restrictToVerticalAxis]}
-			onDragEnd={handleDragEnd}
-			sensors={sensors}
-		>
-			<div className="w-full px-24 pt-4 pb-40 flex items-center justify-center">
-				<table className="table w-10/12 divide-y divide-gray-200 relative">
-					<thead className="bg-slate-300">
-						{table.getHeaderGroups().map((headerGroup) => (
-							<tr key={headerGroup.id} className="table-row">
-								{headerGroup.headers.map((header) => (
-									<th
-										key={header.id}
-										colSpan={header.colSpan}
-										className="uppercase p-2"
-									>
-										{header.isPlaceholder
-											? null
-											: flexRender(
-													header.column.columnDef.header,
-													header.getContext()
-											  )}
-									</th>
-								))}
-							</tr>
-						))}
-					</thead>
-					<tbody className={`divide-y divide-gray-200`}>
-						<SortableContext
-							items={dataIds}
-							strategy={verticalListSortingStrategy}
-						>
-							{table.getRowModel().rows.map((row) => (
-								<DraggableRow key={row.id} row={row} />
+		<>
+			<DndContext
+				collisionDetection={closestCenter}
+				modifiers={[restrictToVerticalAxis]}
+				onDragEnd={handleDragEnd}
+				sensors={sensors}
+			>
+				<div className="w-full px-24 pt-4 pb-40 flex items-center justify-center">
+					<table className="table w-10/12 divide-y divide-gray-200 relative">
+						<thead className="bg-slate-300">
+							{table.getHeaderGroups().map((headerGroup) => (
+								<tr key={headerGroup.id} className="table-row">
+									{headerGroup.headers.map((header) => (
+										<th
+											key={header.id}
+											colSpan={header.colSpan}
+											className="uppercase p-2"
+										>
+											{header.isPlaceholder
+												? null
+												: flexRender(
+														header.column.columnDef.header,
+														header.getContext()
+												  )}
+										</th>
+									))}
+								</tr>
 							))}
-						</SortableContext>
-					</tbody>
-				</table>
-			</div>
-		</DndContext>
+						</thead>
+						<tbody className={`divide-y divide-gray-200`}>
+							<SortableContext
+								items={dataIds}
+								strategy={verticalListSortingStrategy}
+							>
+								{table.getRowModel().rows.map((row) => (
+									<DraggableRow key={row.id} row={row} />
+								))}
+							</SortableContext>
+						</tbody>
+					</table>
+				</div>
+			</DndContext>
+			<button onClick={handleSave}>save</button>
+		</>
 	);
 };
 

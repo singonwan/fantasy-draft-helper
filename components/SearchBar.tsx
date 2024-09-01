@@ -1,7 +1,6 @@
 'use client';
 import React, { useCallback, useState } from 'react';
 import PlayerTable from './PlayerTable';
-import { PLAYERS } from '@/data/players';
 import { POSITIONS } from '@/data/positions';
 import { Player, PlayerPosition } from '@/types';
 import {
@@ -15,15 +14,19 @@ import {
 import clsx from 'clsx';
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
 
-const SearchBar = ({}: // addedPlayers,
-// setAddedPlayers,
-// filteredPlayers,
-// setFilteredPlayers,
-{
-	// addedPlayers: Player[];
-	// setAddedPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
-	// filteredPlayers: Player[];
-	// setFilteredPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
+const SearchBar = ({
+	allPlayers,
+}: {
+	allPlayers: Player[];
+	// 	addedPlayers,
+	// 	setAddedPlayers,
+	// 	filteredPlayers,
+	// 	setFilteredPlayers,
+	// }: {
+	// 	addedPlayers: Player[];
+	// 	setAddedPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
+	// 	filteredPlayers: Player[];
+	// 	setFilteredPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
 }) => {
 	const [searchTerm, setSearchTerm] = useState<string>('');
 
@@ -32,11 +35,9 @@ const SearchBar = ({}: // addedPlayers,
 	);
 
 	const [addedPlayers, setAddedPlayers] = useState<Player[]>([]);
-	// console.log(addedPlayers);
-
 	const [filteredPlayers, setFilteredPlayers] = useState<Player[]>([]);
 
-	const searchFilteredPlayers = PLAYERS.filter(
+	const searchFilteredPlayers = allPlayers.filter(
 		(player) =>
 			searchTerm.length > 0 &&
 			player.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -81,7 +82,7 @@ const SearchBar = ({}: // addedPlayers,
 
 	let players = addedPlayers;
 
-	console.log(positionSelected);
+	// console.log(positionSelected);
 
 	if (positionSelected.position !== 'ALL') {
 		players = filteredPlayers;
