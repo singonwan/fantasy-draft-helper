@@ -194,6 +194,7 @@ const SearchBar = ({
 				players={players}
 				setPlayers={setAddedPlayers}
 				onRemovePlayer={onRemovePlayer}
+				positionSelected={positionSelected.position}
 			/>
 
 			{/* <div className="w-full p-24">
