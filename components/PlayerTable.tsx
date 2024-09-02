@@ -7,7 +7,7 @@ import {
 	ColumnDef,
 	Row,
 } from '@tanstack/react-table';
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useContext } from 'react';
 import {
 	arrayMove,
 	SortableContext,
@@ -29,6 +29,7 @@ import {
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { Player } from '@/types';
 import { IoMdCloseCircle } from 'react-icons/io';
+import { UserContext } from '../store/user-context';
 
 // Cell Component
 const RowDragHandleCell = ({ rowId }: { rowId: string }) => {
@@ -100,6 +101,8 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 	onRemovePlayer,
 	filtered,
 }) => {
+	const userctx = useContext(UserContext);
+
 	const memoColumns = React.useMemo<ColumnDef<Player>[]>(
 		() => [
 			{
@@ -230,6 +233,9 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 					</table>
 				</div>
 			</DndContext>
+			<p>
+				{userctx.user?.id} {userctx.user?.name}
+			</p>
 			<button onClick={handleSave}>save</button>
 		</>
 	);

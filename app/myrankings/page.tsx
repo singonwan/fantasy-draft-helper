@@ -1,7 +1,7 @@
 import SearchBar from '@/components/SearchBar';
 import React from 'react';
 import { getAllPlayers } from './actions';
-// import { verifySession } from '../_lib/session';
+import { verifySession } from '../_lib/session';
 // import { useState } from 'react';
 // import { Player } from '@/types';
 
@@ -14,7 +14,9 @@ const MyOrder = async () => {
 	// const [addedPlayers, setAddedPlayers] = useState<Player[]>([]);
 	// const [filteredPlayers, setFilteredPlayers] = useState<Player[]>([]);
 
-	// const session = await verifySession(); // shouldn'e be using this here. // only in actions // use global state instead.
+	const session = await verifySession();
+	// pass session down for app state with context
+	// console.log(session);
 
 	return (
 		<>
@@ -23,6 +25,7 @@ const MyOrder = async () => {
 			</h1>
 			<SearchBar
 				allPlayers={allPlayers}
+				session={session}
 				// addedPlayers={addedPlayers}
 				// setAddedPlayers={setAddedPlayers}
 				// filteredPlayers={filteredPlayers}

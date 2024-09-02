@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import PlayerTable from './PlayerTable';
 import { POSITIONS } from '@/data/positions';
 import { Player, PlayerPosition } from '@/types';
@@ -13,11 +13,14 @@ import {
 } from '@headlessui/react';
 import clsx from 'clsx';
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
+import { UserContext } from '@/store/user-context';
 
 const SearchBar = ({
 	allPlayers,
+	session,
 }: {
 	allPlayers: Player[];
+	session: { userId: string; userName: string } | null;
 	// 	addedPlayers,
 	// 	setAddedPlayers,
 	// 	filteredPlayers,
@@ -29,13 +32,20 @@ const SearchBar = ({
 	// 	setFilteredPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
 }) => {
 	const [searchTerm, setSearchTerm] = useState<string>('');
-
 	const [positionSelected, setPositionSelected] = useState<PlayerPosition>(
 		POSITIONS[0]
 	);
-
 	const [addedPlayers, setAddedPlayers] = useState<Player[]>([]);
 	const [filteredPlayers, setFilteredPlayers] = useState<Player[]>([]);
+
+	// adding user context
+	const userctx = useContext(UserContext);
+
+	useEffect(() => {
+		if (session) {
+			userctx.setUser({ id: session.userId, name: session.userName });
+		}
+	}, [session, userctx]);
 
 	const searchFilteredPlayers = allPlayers.filter(
 		(player) =>

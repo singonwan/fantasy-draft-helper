@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import NavBar from '@/components/NavBar';
+import UserContextProvider from '@/store/user-context';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -32,8 +33,10 @@ export default function RootLayout({
 								className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
 							/>
 						</div>
-						<NavBar />
-						{children}
+						<UserContextProvider>
+							<NavBar />
+							{children}
+						</UserContextProvider>
 					</div>
 				</div>
 			</body>
