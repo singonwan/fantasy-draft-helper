@@ -18,9 +18,11 @@ import { UserContext } from '@/store/user-context';
 const SearchBar = ({
 	allPlayers,
 	session,
+	savedRankings,
 }: {
 	allPlayers: Player[];
 	session: { userId: string; userName: string } | null;
+	savedRankings: Player[];
 	// 	addedPlayers,
 	// 	setAddedPlayers,
 	// 	filteredPlayers,
@@ -35,13 +37,19 @@ const SearchBar = ({
 	const [positionSelected, setPositionSelected] = useState<PlayerPosition>(
 		POSITIONS[0]
 	);
-	const [addedPlayers, setAddedPlayers] = useState<Player[]>([]);
+	const [addedPlayers, setAddedPlayers] = useState<Player[]>(savedRankings);
 	const [filteredPlayers, setFilteredPlayers] = useState<Player[]>([]);
+
+	console.log('added', addedPlayers);
 
 	// adding user context
 	const userctx = useContext(UserContext);
 
 	const { setUser } = userctx;
+
+	// useEffect(() => {
+
+	// })
 
 	useEffect(() => {
 		if (session) {
@@ -71,7 +79,20 @@ const SearchBar = ({
 		console.log(player);
 		setAddedPlayers((prevAddedPlayers) => {
 			let updatedAddedPlayers = [...prevAddedPlayers];
-			if (!prevAddedPlayers.includes(player)) {
+			// console.log('updatedAddedPLayers', updatedAddedPlayers);
+			// console.log('prevAddedPlayers', prevAddedPlayers);
+			// console.log('player', player);
+			// console.log('prevaddedplayersinclude', prevAddedPlayers.includes(player));
+			// console.log(
+			// 	prevAddedPlayers.some(
+			// 		(existingplayer) => existingplayer.id === player.id
+			// 	)
+			// );
+			if (
+				!prevAddedPlayers.some(
+					(existingplayer) => existingplayer.id === player.id
+				)
+			) {
 				updatedAddedPlayers = [...prevAddedPlayers, player];
 			} else {
 				console.log('players been added already');

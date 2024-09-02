@@ -1,6 +1,6 @@
 import SearchBar from '@/components/SearchBar';
 import React from 'react';
-import { getAllPlayers } from './actions';
+import { getAllPlayers, getSavedRankings } from './actions';
 import { verifySession } from '../_lib/session';
 // import { useState } from 'react';
 // import { Player } from '@/types';
@@ -18,6 +18,14 @@ const MyOrder = async () => {
 	// pass session down for app state with context
 	// console.log(session);
 
+	// get players from user rankings
+	let savedRankings = [];
+	if (session) {
+		const data = await getSavedRankings(session.userId);
+		console.log('data', data);
+		savedRankings = data;
+	}
+
 	return (
 		<>
 			<h1 className="font-bold text-3xl p-20 uppercase text-center">
@@ -26,6 +34,7 @@ const MyOrder = async () => {
 			<SearchBar
 				allPlayers={allPlayers}
 				session={session}
+				savedRankings={savedRankings}
 				// addedPlayers={addedPlayers}
 				// setAddedPlayers={setAddedPlayers}
 				// filteredPlayers={filteredPlayers}

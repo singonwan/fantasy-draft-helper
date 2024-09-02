@@ -30,6 +30,7 @@ import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { Player } from '@/types';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { UserContext } from '../store/user-context';
+import { saveRankings } from '@/app/myrankings/actions';
 
 // Cell Component
 const RowDragHandleCell = ({ rowId }: { rowId: string }) => {
@@ -186,10 +187,13 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 	);
 
 	function handleSave() {
-		console.log(
-			'Row IDs:',
-			table.getRowModel().rows.map((row) => row.id)
-		);
+		// console.log(
+		// 	'Row IDs:',
+		// 	table.getRowModel().rows.map((row) => row.id)
+		// );
+		const rankArray = table.getRowModel().rows.map((row) => row.id);
+		const userId = userctx.user?.id;
+		saveRankings(userId, rankArray);
 	}
 
 	return (
@@ -200,7 +204,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 				onDragEnd={handleDragEnd}
 				sensors={sensors}
 			>
-				<div className="w-full px-24 pt-4 pb-40 flex items-center justify-center">
+				<div className="w-full px-24 pt-4 pb-12 flex items-center justify-center">
 					<table className="table w-10/12 divide-y divide-gray-200 relative">
 						<thead className="bg-slate-300">
 							{table.getHeaderGroups().map((headerGroup) => (
@@ -236,17 +240,13 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 				</div>
 			</DndContext>
 			<div className="flex items-center justify-center flex-col">
-				<p className="text-xs">
+				<p className="text-xs pb-2">
 					Your data can be saved if you are logged in and have the position tab
 					at ALL
 				</p>
 			</div>
 			{userctx.user && positionSelected === 'ALL' && (
 				<div className="flex items-center justify-center flex-col pb-40">
-					<p>{positionSelected}</p>
-					<p>
-						{userctx.user?.id} {userctx.user?.name}
-					</p>
 					<button
 						className="hidden select-none rounded-lg bg-gradient-to-tr from-purple-900 to-purple-800 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
 						onClick={handleSave}
