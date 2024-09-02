@@ -1,9 +1,14 @@
 'use client';
-import React from 'react';
+import React, { useContext } from 'react';
 import { logout } from '../app/(auth)/actions';
+import { UserContext } from '@/store/user-context';
 
 const LogOutButton = () => {
+	const userctx = useContext(UserContext);
+
 	const handleClick = () => {
+		userctx.removeUser();
+		console.log('userctx after logout', userctx.user);
 		logout();
 	};
 

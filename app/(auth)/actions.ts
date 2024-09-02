@@ -118,9 +118,11 @@ export async function logout() {
 	try {
 		await deleteSession();
 		// Additional cleanup tasks can be added here if needed
+		console.log('deleted session');
 	} catch (error) {
 		console.error('Logout error:', error);
 		// redirect to error page
 	}
-	redirect('/login');
+	console.log('redirecting');
+	redirect('/');
 }

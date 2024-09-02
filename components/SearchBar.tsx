@@ -41,11 +41,13 @@ const SearchBar = ({
 	// adding user context
 	const userctx = useContext(UserContext);
 
+	const { setUser } = userctx;
+
 	useEffect(() => {
 		if (session) {
-			userctx.setUser({ id: session.userId, name: session.userName });
+			setUser({ id: session.userId, name: session.userName });
 		}
-	}, [session, userctx]);
+	}, [session, setUser]);
 
 	const searchFilteredPlayers = allPlayers.filter(
 		(player) =>
