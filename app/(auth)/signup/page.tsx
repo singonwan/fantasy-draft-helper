@@ -9,7 +9,7 @@ import SignupFormSubmit from '../../../components/SignupFormSubmit';
 const SignUpPage = () => {
 	const [state, action] = useFormState(signup, null);
 
-	// console.log(state?.errors);
+	console.log(state?.errors);
 
 	return (
 		<>
@@ -86,11 +86,10 @@ const SignUpPage = () => {
 									className="block w-full rounded-md border-0 py-1.5 px-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 								/>
 							</div>
-							{state?.errors?.password && (
-								<p className="text-red-600 text-xs pt-1">
-									{state.errors.password}
-								</p>
-							)}
+							{state?.errors?.password &&
+								state.errors.password.map((err) => {
+									return <p className="text-red-600 text-xs pt-1">{err}</p>;
+								})}
 						</div>
 						<div>
 							<div className="flex items-center justify-between">
@@ -111,11 +110,10 @@ const SignUpPage = () => {
 									className="block w-full rounded-md border-0 py-1.5 px-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 								/>
 							</div>
-							{state?.errors?.confirmpassword && (
-								<p className="text-red-600 text-xs pt-1">
-									{state.errors.confirmpassword}
-								</p>
-							)}
+							{state?.errors?.confirmpassword &&
+								state?.errors.confirmpassword.map((err) => {
+									return <p className="text-red-600 text-xs pt-1">{err}</p>;
+								})}
 						</div>
 
 						<div>
