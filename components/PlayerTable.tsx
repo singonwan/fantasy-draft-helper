@@ -31,6 +31,7 @@ import { Player } from '@/types';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { UserContext } from '../store/user-context';
 import { saveRankings } from '@/app/myrankings/actions';
+import toast from 'react-hot-toast';
 
 // Cell Component
 const RowDragHandleCell = ({ rowId }: { rowId: string }) => {
@@ -194,6 +195,15 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 		const rankArray = table.getRowModel().rows.map((row) => row.id);
 		const userId = userctx.user?.id;
 		saveRankings(userId, rankArray);
+		toast('Rankings Saved!', {
+			position: 'top-center',
+			duration: 3000,
+			icon: '👏',
+			style: {
+				background: 'green',
+				fontWeight: 'bold',
+			},
+		});
 	}
 
 	return (
