@@ -14,6 +14,7 @@ import {
 import clsx from 'clsx';
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
 import { UserContext } from '@/store/user-context';
+import toast from 'react-hot-toast';
 
 const SearchBar = ({
 	allPlayers,
@@ -105,10 +106,33 @@ const SearchBar = ({
 	const onRemovePlayer = useCallback(
 		(id: string) => {
 			console.log(id);
+			const playerIndex = addedPlayers.findIndex((player) => player.id === id);
+			const deletedPlayer = addedPlayers.find((player) => player.id === id);
 			const updatedAddedPlayers = addedPlayers.filter(
 				(player) => player.id !== id
 			);
 			setAddedPlayers(updatedAddedPlayers);
+
+			const undoToast = toast(
+				<div className="flex items-center flex-col">
+					<p className="font-bold">{deletedPlayer?.name} Removed!</p>
+					<button
+						className=" font-medium text-blue-600 p-1.5 hover:bg-blue-100 rounded-lg"
+						onClick={() => {
+							toast.dismiss(undoToast);
+							const newPlayerList = [
+								...updatedAddedPlayers.slice(0, playerIndex),
+								deletedPlayer,
+								...updatedAddedPlayers.slice(playerIndex),
+							];
+							setAddedPlayers(newPlayerList);
+						}}
+					>
+						Undo
+					</button>
+				</div>,
+				{ position: 'top-right', duration: 4000 }
+			);
 		},
 		[addedPlayers]
 	);

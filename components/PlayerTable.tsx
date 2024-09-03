@@ -200,7 +200,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 			duration: 3000,
 			icon: '👏',
 			style: {
-				background: 'green',
+				background: '#32de84',
 				fontWeight: 'bold',
 			},
 		});
