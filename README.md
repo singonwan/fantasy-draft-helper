@@ -39,6 +39,9 @@ Global State
 - if signed in, ability to save the rankings for future use.
 - more to come...
 
+# Video Demo
+- https://youtu.be/o_FDW9uwTjI
+
 
 
 ## Getting Started
