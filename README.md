@@ -1,8 +1,45 @@
 # fantasy-draft-helper
 
+Next.js fullstack applicaiton that allows users to create their own fnatasy player rankings with the ability to add players to the list, remove players, and rearrange players by dragging and dropping the player to whatever rank you desire. User's with an account can also save the rankings for future use. You can also filter by positions to see the ranks of your players of a certain position. 
+
+Leveraging Server Actions to reduce the load on the frontend, 'server-only' to implement session creations/verification/deletion using JWT to ensure security.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-nextauth.js/prisma/posgreSQL/postico/supabase for authentication and DB
+# Technology
+
+Next.js, TypeScript, Tanstack Table, dnd-kit
+
+CSS
+- tailwind CSS
+- heroicons
+- headless UI
+- react-icons
+
+ORM
+- prisma
+
+DB
+- supabase (postgresQL)
+
+Auth
+- bcrypt
+- jose
+- zod - for input validations
+
+Global State
+- context API
+
+# Functionalities
+- create an account
+- add players to rankings
+- remove players from ranking, with the ability to undo within 4 seconds
+- drag and drop players to anywhere on the list for re rankings purposes
+- filter players by positions
+- if signed in, ability to save the rankings for future use.
+- more to come...
+
+
 
 ## Getting Started
 
