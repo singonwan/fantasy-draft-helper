@@ -6,7 +6,7 @@ Leveraging Server Actions to reduce the load on the frontend, 'server-only' to i
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-# Technology
+## Technology
 
 Next.js, TypeScript, Tanstack Table, dnd-kit
 
@@ -30,7 +30,7 @@ Auth
 Global State
 - context API
 
-# Functionalities
+## Functionalities
 - create an account
 - add players to rankings
 - remove players from ranking, with the ability to undo within 4 seconds
@@ -39,7 +39,7 @@ Global State
 - if signed in, ability to save the rankings for future use.
 - more to come...
 
-# Video Demo
+## Video Demo
 - https://youtu.be/o_FDW9uwTjI
 
 
