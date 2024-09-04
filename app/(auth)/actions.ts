@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 import { createSession, deleteSession } from '../_lib/session';
 import { redirect } from 'next/navigation';
 
-export async function signup(state, formData) {
+export async function signup(state, formData: FormData) {
 	// 1.validate fields
 	const validationResult = signupFormSchema.safeParse({
 		name: formData.get('name'),
@@ -21,7 +21,6 @@ export async function signup(state, formData) {
 	}
 
 	const { name, email, password } = validationResult.data;
-	// console.log(name, email, password);
 
 	try {
 		// Check for unique email
@@ -48,7 +47,7 @@ export async function signup(state, formData) {
 			},
 		});
 
-		console.log('User created:', user);
+		// console.log('User created:', user);
 
 		// 3.create session
 		await createSession(user.id, user.name);
@@ -61,7 +60,7 @@ export async function signup(state, formData) {
 	redirect('/myrankings');
 }
 
-export async function login(state, formData) {
+export async function login(state, formData: FormData) {
 	// 1. validate fields
 	const validationResult = loginFormSchema.safeParse({
 		email: formData.get('email'),
@@ -100,11 +99,6 @@ export async function login(state, formData) {
 		// create session
 		await createSession(user.id, user.name);
 		//redirect must happen outside of try/catch cus it throws an error
-
-		// return {
-		// 	success: true,
-		// 	user,
-		// };
 	} catch (error) {
 		console.error('Login error:', error);
 		return {
@@ -123,6 +117,6 @@ export async function logout() {
 		console.error('Logout error:', error);
 		// redirect to error page
 	}
-	console.log('redirecting');
+	// console.log('redirecting');
 	redirect('/');
 }

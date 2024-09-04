@@ -1,6 +1,5 @@
 import 'server-only';
 import { SignJWT, jwtVerify } from 'jose';
-import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 
 interface JwtPayload {
@@ -40,19 +39,17 @@ export async function decrypt(session) {
 	}
 }
 
-export async function createSession(userId, userName) {
+export async function createSession(userId: string, userName: string) {
 	try {
 		const expires = new Date(Date.now() + cookie.duration);
 		const session = await encrypt({ userId, userName, expires });
 
 		cookies().set(cookie.name, session, { ...cookie.options, expires });
-		// redirect('/myrankings');
+
 		return { success: true };
 	} catch (error) {
 		console.error('Session creation error:', error);
 		return { success: false, error };
-		// Handle the error, e.g., redirect to an error page or return an error response
-		// redirect('/error');
 	}
 }
 
@@ -65,7 +62,7 @@ export async function verifySession() {
 		}
 
 		const session = await decrypt(cookieValue);
-		console.log('Verify Session:', session);
+		// console.log('Verify Session:', session);
 
 		if (!session?.userId) {
 			console.log('not logged in');
@@ -75,7 +72,6 @@ export async function verifySession() {
 		return { userId: session.userId, userName: session.userName };
 	} catch (error) {
 		console.error('Session verification error:', error);
-		// redirect('/login');
 		return null;
 	}
 }
@@ -83,12 +79,10 @@ export async function verifySession() {
 export async function deleteSession() {
 	try {
 		cookies().delete(cookie.name);
-		// redirect('/login');
 		return { success: true };
 	} catch (error) {
 		console.error('Error deleting session:', error);
 		return { success: false, error };
 		// Handle the error, e.g., redirect to an error page or return an error response
-		// redirect('/error');
 	}
 }

@@ -24,15 +24,6 @@ const SearchBar = ({
 	allPlayers: Player[];
 	session: { userId: string; userName: string } | null;
 	savedRankings: Player[];
-	// 	addedPlayers,
-	// 	setAddedPlayers,
-	// 	filteredPlayers,
-	// 	setFilteredPlayers,
-	// }: {
-	// 	addedPlayers: Player[];
-	// 	setAddedPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
-	// 	filteredPlayers: Player[];
-	// 	setFilteredPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
 }) => {
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const [positionSelected, setPositionSelected] = useState<PlayerPosition>(
@@ -41,16 +32,11 @@ const SearchBar = ({
 	const [addedPlayers, setAddedPlayers] = useState<Player[]>(savedRankings);
 	const [filteredPlayers, setFilteredPlayers] = useState<Player[]>([]);
 
-	console.log('added', addedPlayers);
+	// console.log('added', addedPlayers);
 
 	// adding user context
 	const userctx = useContext(UserContext);
-
 	const { setUser } = userctx;
-
-	// useEffect(() => {
-
-	// })
 
 	useEffect(() => {
 		if (session) {
@@ -77,18 +63,8 @@ const SearchBar = ({
 
 	const onAddPlayer = (player: Player) => {
 		setSearchTerm(player.name);
-		console.log(player);
 		setAddedPlayers((prevAddedPlayers) => {
 			let updatedAddedPlayers = [...prevAddedPlayers];
-			// console.log('updatedAddedPLayers', updatedAddedPlayers);
-			// console.log('prevAddedPlayers', prevAddedPlayers);
-			// console.log('player', player);
-			// console.log('prevaddedplayersinclude', prevAddedPlayers.includes(player));
-			// console.log(
-			// 	prevAddedPlayers.some(
-			// 		(existingplayer) => existingplayer.id === player.id
-			// 	)
-			// );
 			if (
 				!prevAddedPlayers.some(
 					(existingplayer) => existingplayer.id === player.id
@@ -105,7 +81,6 @@ const SearchBar = ({
 
 	const onRemovePlayer = useCallback(
 		(id: string) => {
-			console.log(id);
 			const playerIndex = addedPlayers.findIndex((player) => player.id === id);
 			const deletedPlayer = addedPlayers.find((player) => player.id === id);
 			const updatedAddedPlayers = addedPlayers.filter(
@@ -138,8 +113,6 @@ const SearchBar = ({
 	);
 
 	let players = addedPlayers;
-
-	// console.log(positionSelected);
 
 	if (positionSelected.position !== 'ALL') {
 		players = filteredPlayers;
@@ -241,22 +214,6 @@ const SearchBar = ({
 				onRemovePlayer={onRemovePlayer}
 				positionSelected={positionSelected.position}
 			/>
-
-			{/* <div className="w-full p-24">
-				<h1>Your Ranking</h1>
-				{addedPlayers.map((player, index) => (
-					<div
-						className="width-full font-bold text-xl flex justify-between p-2 bg-slate-400 border border-blue-400"
-						key={player.id}
-						draggable={true}
-					>
-						<p>
-							{player.name} {player.position}, {player.team}
-						</p>
-						<button onClick={() => onRemovePlayer(player.id)}>X</button>
-					</div>
-				))}
-			</div> */}
 		</div>
 	);
 };

@@ -1,5 +1,6 @@
 'use server';
 
+import { Player } from '@/types';
 import prisma from '@/utils/db';
 
 export async function getAllPlayers() {
@@ -7,9 +8,7 @@ export async function getAllPlayers() {
 	return players;
 }
 
-export async function saveRankings(userId, rankArray) {
-	// let data = []
-
+export async function saveRankings(userId: string, rankArray: Player[]) {
 	// have to delete all rankings of user first
 	const deleteOldData = await prisma.ranking.deleteMany({
 		where: {
@@ -27,11 +26,9 @@ export async function saveRankings(userId, rankArray) {
 	const playerRanks = await prisma.ranking.createMany({
 		data: data,
 	});
-
-	console.log(data);
 }
 
-export async function getSavedRankings(userId) {
+export async function getSavedRankings(userId: string) {
 	const playerRankings = await prisma.ranking.findMany({
 		where: {
 			userId: userId,
@@ -41,15 +38,13 @@ export async function getSavedRankings(userId) {
 		},
 	});
 
-	console.log('playerRankings', playerRankings);
+	// console.log('playerRankings', playerRankings);
 
 	const playerIds = playerRankings.map((ranking) => ranking.playerId);
 
 	const players = await prisma.player.findMany({
 		where: { id: { in: playerIds } },
 	});
-
-	console.log('players', players);
 
 	// Create a map to quickly lookup players by their ID
 	const playerMap = new Map(players.map((player) => [player.id, player]));

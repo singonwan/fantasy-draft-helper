@@ -8,7 +8,7 @@ const LogOutButton = () => {
 
 	const handleClick = () => {
 		userctx.removeUser();
-		console.log('userctx after logout', userctx.user);
+		// console.log('userctx after logout', userctx.user);
 		logout();
 	};
 

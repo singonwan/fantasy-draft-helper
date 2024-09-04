@@ -9,7 +9,7 @@ import SignupFormSubmit from '../../../components/SignupFormSubmit';
 const SignUpPage = () => {
 	const [state, action] = useFormState(signup, null);
 
-	console.log(state?.errors);
+	// console.log(state?.errors);
 
 	return (
 		<>

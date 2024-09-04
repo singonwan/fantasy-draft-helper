@@ -6,7 +6,7 @@ import LogOutButton from '../components/LogOutButton';
 const NavBar = async () => {
 	const session = await verifySession();
 
-	console.log(session);
+	// console.log(session);
 
 	return (
 		<nav className="block w-full max-w-screen-xl px-4 py-2 mx-auto text-white bg-white border shadow-md rounded-xl border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">

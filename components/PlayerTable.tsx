@@ -188,10 +188,6 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 	);
 
 	function handleSave() {
-		// console.log(
-		// 	'Row IDs:',
-		// 	table.getRowModel().rows.map((row) => row.id)
-		// );
 		const rankArray = table.getRowModel().rows.map((row) => row.id);
 		const userId = userctx.user?.id;
 		saveRankings(userId, rankArray);
