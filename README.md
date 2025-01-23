@@ -26,6 +26,7 @@ Auth
 - bcrypt
 - jose
 - zod - for input validations
+- middleware.ts
 
 Global State
 - context API
