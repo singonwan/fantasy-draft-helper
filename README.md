@@ -37,7 +37,7 @@ Global State
 - remove players from ranking, with the ability to undo within 4 seconds
 - drag and drop players to anywhere on the list for re rankings purposes
 - filter players by positions
-- if signed in, ability to save the rankings for future use.
+- if signed in, ability to save the rankings for future use. If not, that's ok, you can still play with the rankings, but you won't be able to preserve is.
 - more to come...
 
 ## Video Demo
